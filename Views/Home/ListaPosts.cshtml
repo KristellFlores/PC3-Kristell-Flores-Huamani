@@ -1,0 +1,50 @@
+﻿@model List<Pc3.DTO.PostDTO>
+
+@{
+    ViewData["Title"] = "Lista de Posts";
+}
+
+@if (TempData["Excelente"] != null)
+{
+    <div class="alert alert-success" style="font-size: 22px; padding: 10px;">
+        @TempData["Excelente"]
+    </div>
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID del Usuario</th>
+            <th>ID del Post</th>
+            <th>Título</th>
+            <th>Cuerpo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var post in Model)
+        {
+            <tr>
+                <td>@post.userId</td>
+                <td>@post.id</td>
+                <td>@post.title</td>
+                <td>@post.Body</td>
+                <td>
+                    <a asp-controller="Home" asp-action="EditPost" asp-route-id="@post.id" class="btn btn-warning">Editar</a>
+                    <a asp-controller="Home" asp-action="DeletePost" asp-route-id="@post.id" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este post?');">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Home" asp-action="CreatePost" class="btn btn-primary">Crear nuevo post</a>
+
+@if (TempData["Excelente"] != null)
+{
+    <div class="alert alert-success" style="font-size: 22px; padding: 10px;">
+        @TempData["Excelente"]
+    </div>
+}
